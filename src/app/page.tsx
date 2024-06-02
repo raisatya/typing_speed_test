@@ -103,10 +103,6 @@ const Home = () => {
   return (
     <div onClick={() => inputRef.current?.focus()} style={{ cursor: "text" }}>
       <h1>Typing Test</h1>
-      {isMobileDevice ? (
-        <p>This application is best experienced on a desktop device.</p>
-      ) : (
-        <>
           <div
             style={{
               whiteSpace: "pre-wrap",
@@ -135,8 +131,6 @@ const Home = () => {
           <button onClick={handleSubmit} disabled={timeLeft !== 0}>
             Submit
           </button>
-        </>
-      )}
     </div>
   );
 };
