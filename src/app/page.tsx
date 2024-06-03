@@ -2,10 +2,11 @@
 
 import { useState, useEffect, useRef } from "react";
 import { isMobile } from "@/utils/detectDevice";
+import Navbar from "./components/Navbar";
 
 const Home = () => {
   const [text, setText] = useState(
-    "The quick brown fox jumps over the lazy dog."
+    "Every person desires growth, aiming higher goals within career paths. People manage duties, facing stress daily. Amid hectic rhythms, many forget simple joys. Smiles brighten gloomy moods, sparking hope within. Nature's wonders offer soothing escape. Forests, rivers, meadows bring peaceful moments. Cities buzz loudly, demanding focus. Hustle remains constant, draining energy. Friends provide comfort, sharing stories, laughter echoing warmly. Books capture dreams, unlocking worlds unknown. Authors craft tales, weaving magic, enchanting readers deeply. Travel broadens horizons, exploring diverse cultures. Journeying afar, meeting strangers, embracing differences. Cuisine tempts palates, savoring unique flavors. Music soothes souls, melodies floating gently. Art inspires creativity, colors blending beautifully. Technology advances rapidly, transforming society. Innovations emerge, enhancing lifestyles significantly. Fitness maintains health, strengthening bodies. Exercise routines vary, ensuring balanced workouts. Minds sharpen through puzzles, challenging intellects. Family bonds tighten, fostering support. Celebrations unite relatives, marking milestones proudly. Holidays provide breaks, allowing relaxation. Memories linger, cherished forever. Emotions fluctuate, expressing genuine feelings. Kindness spreads joy, touching hearts profoundly. Pets bring companionship, comforting presence. Life's journey unfolds, presenting opportunities constantly. Choices shape destinies, steering futures wisely. Embrace every moment, cherishing experiences wholly. Achievements reflect perseverance, showcasing dedication clearly. Finally, remember balance sustains harmony, nurturing wellbeing consistently."
   );
   const [input, setInput] = useState("");
   const [startTime, setStartTime] = useState<Date | null>(null);
@@ -90,48 +91,46 @@ const Home = () => {
       );
     });
 
-    // Add the caret
-    renderedText.splice(
-      input.length,
-      0,
-      <span key="caret" className="text-lg animate-ping">|</span>
-    );
-
     return renderedText;
   };
 
   return (
-    <div onClick={() => inputRef.current?.focus()} style={{ cursor: "text" }}>
-      <h1>Typing Test</h1>
-          <div
-            style={{
-              whiteSpace: "pre-wrap",
-              wordWrap: "break-word",
-              fontSize: "18px",
-              lineHeight: "1.5",
-            }}
-          >
-            {renderText()}
-          </div>
-          <textarea
-            ref={inputRef}
-            value={input}
-            onChange={handleChange}
-            disabled={timeLeft === 0}
-            style={{
-              position: "absolute",
-              opacity: 0,
-              zIndex: -1,
-            }}
-            autoFocus
-          ></textarea>
-          <p>WPM: {wpm}</p>
-          <p>Accuracy: {accuracy}%</p>
-          <p>Time Left: {timeLeft} seconds</p>
-          <button onClick={handleSubmit} disabled={timeLeft !== 0}>
-            Submit
-          </button>
-    </div>
+    <>
+      <Navbar />
+      <div
+        onClick={() => inputRef.current?.focus()}
+        className="cursor-text text-center"
+      >
+        <h1>Typing Test</h1>
+        <p>Time Left: {timeLeft} seconds</p>
+        <div
+          style={{
+            whiteSpace: "pre-wrap",
+            wordWrap: "break-word",
+            fontSize: "18px",
+            lineHeight: "1.5",
+          }}
+        >
+          {renderText()}
+        </div>
+        <textarea
+          ref={inputRef}
+          value={input}
+          onChange={handleChange}
+          disabled={timeLeft === 0}
+          style={{
+            position: "absolute",
+            zIndex: -1,
+          }}
+          autoFocus
+        ></textarea>
+        <p>WPM: {wpm}</p>
+        <p>Accuracy: {accuracy}%</p>
+        <button onClick={handleSubmit} disabled={timeLeft !== 0}>
+          Submit
+        </button>
+      </div>
+    </>
   );
 };
 

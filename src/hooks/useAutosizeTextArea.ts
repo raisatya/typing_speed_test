@@ -1,10 +1,16 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-const useAutosizeTextArea = (textAreaRef: HTMLTextAreaElement | null, value: string) => {
+const useAutosizeTextArea = (
+  textAreaRef: HTMLTextAreaElement | null,
+  value: string
+) => {
   useEffect(() => {
     if (textAreaRef) {
-      // Set the scroll to the bottom if the content exceeds the height
-      textAreaRef.scrollTop = textAreaRef.scrollHeight;
+      // Reset the height to measure the scrollHeight
+      textAreaRef.style.height = "0px";
+      const scrollHeight = textAreaRef.scrollHeight;
+      // Set the height to scrollHeight
+      textAreaRef.style.height = `${scrollHeight}px`;
     }
   }, [textAreaRef, value]);
 };
