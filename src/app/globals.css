@@ -1,19 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.caretStyle {
-    display: inline-block;
-    width: 1px;
-    background-color: black;
-    animation: blink 1s step-end infinite;
+@keyframes slideUp {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
-@keyframes blink {
-    from,
-    to {
-        background-color: transparent;
+.slide-up {
+    animation: slideUp 1s ease-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
     }
-    50% {
-        background-color: black;
+    100% {
+        opacity: 1;
     }
+}
+
+.fade-in {
+    animation: fadeIn 3s ease-in-out;
+}
+
+.blurryBackground {
+    background-image: url('/layered-peaks-haikei.svg');
+}
+
+.correctText {
+    background: -webkit-linear-gradient(#008800, #006600);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.incorrectText {
+    background: -webkit-linear-gradient(#d42405, #990000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }

@@ -1,8 +1,9 @@
+"use client"
 import React from 'react'
 
 const Navbar = () => {
   return (
-    <nav className="flex justify-between items-center p-3 bg-white border-b w-full">
+    <nav className="flex justify-between items-center p-3 bg-transparent border-b w-full">
       <div className="flex items-center md:gap-x-12">
         <button className="w-32 sm:w-36">
           <img src="/next.svg" alt="Dlogo" />
