@@ -1,8 +1,8 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react";
-import { isMobile } from "@/app/utils/detectDevice";
-import { words } from "@/app/utils/words";
+import { isMobile } from "@/utils/detectDevice";
+import { words } from "@/utils/words";
 import ScoreDisplay from "./ScoreDisplay";
 
 const GameComponent = () => {
