@@ -61,34 +61,11 @@ const GameComponent = () => {
       setStartTime(null);
       setWpm(0);
       setTimeLeft(60);
+      setIsGameOver(false);
       if (inputRef.current) {
         inputRef.current.focus();
       }
     }
-
-    const handleSubmit = async () => {
-      const response = await fetch("/api/test-results", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: 1, // Replace with dynamic user ID
-          wpm,
-        }),
-      });
-      const data = await response.json();
-      console.log(data);
-      // Reset the test
-      setCurrentWordIndex(0);
-      setInput("");
-      setStartTime(null);
-      setWpm(0);
-      setTimeLeft(60);
-      if (inputRef.current) {
-        inputRef.current.focus();
-      }
-    };
 
     const renderText = () => {
       const currentWord = words[currentWordIndex];
@@ -109,12 +86,13 @@ const GameComponent = () => {
       return renderedText;
     };
 
-    const handleCancelResult = () => {
-      handleClear();
-      setIsGameOver(false);
-    }
-
-    const renderedDiv = isGameOver ? <ScoreDisplay wpm={wpm} handleCancelResult={handleCancelResult} handleSubmit={handleSubmit} /> : (
+    const renderedDiv = isGameOver ? (
+      <ScoreDisplay
+        wpm={wpm}
+        isMobileDevice={isMobileDevice}
+        handleClear={handleClear}
+      />
+    ) : (
       <div
         onClick={() => {
           if (inputRef.current) {
@@ -137,30 +115,30 @@ const GameComponent = () => {
           placeholder="Type the word shown above"
           autoFocus
         />
-          <button
-            onClick={handleClear}
-            className="relative mt-6 flex py-2 text-white items-center justify-center px-8 before:absolute before:inset-0 before:rounded-full before:bg-indigo-700 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95"
+        <button
+          onClick={handleClear}
+          className="relative mt-6 flex py-2 text-white items-center justify-center px-8 before:absolute before:inset-0 before:rounded-full before:bg-indigo-700 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="white"
+            className="relative size-6 mr-2"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="white"
-              className="relative size-6 mr-2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"
-              />
-            </svg>
-            <span className="relative flex justify-center items-center space-x-1 text-sm font-semibold">
-              Restart
-            </span>
-          </button>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"
+            />
+          </svg>
+          <span className="relative flex justify-center items-center space-x-1 text-sm font-semibold">
+            Restart
+          </span>
+        </button>
       </div>
-    )
+    );
 
     return renderedDiv;
 }

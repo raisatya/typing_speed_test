@@ -11,7 +11,6 @@ const Navbar = async () => {
   const session = await getUser();
 
   const imageSrc = session?.user?.image || "/TypeRush.svg";
-console.log(session);
   return (
     <nav className="flex justify-between items-center p-3 bg-transparent border-b w-full">
       <div className="flex items-center md:gap-x-12">

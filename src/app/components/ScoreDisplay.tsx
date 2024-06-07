@@ -1,23 +1,50 @@
 import React from 'react'
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import SignInButton from './SignInButton';
 
 interface ScoreDisplayProps {
   wpm: number;
-  handleCancelResult: () => void;
-  handleSubmit: () => void;
+  isMobileDevice: boolean;
+  handleClear: () => void;
 }
 
 const ScoreDisplay: React.FC<ScoreDisplayProps> = ({
   wpm,
-  handleCancelResult,
-  handleSubmit,
+  isMobileDevice,
+  handleClear
 }) => {
+
+  const { data: session } = useSession();
+
+  const deviceType = isMobileDevice ? 'Mobile' : 'Desktop';
+
+  const handleSubmit = async () => {
+    const response = await fetch("/api/save-results", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: session?.user?.name,
+        emailId: session?.user?.email,
+        imgUrl: session?.user?.image,
+        deviceType: deviceType, // Replace with dynamic user ID
+        wpm,
+      }),
+    });
+    const data = await response.json();
+    console.log(data);
+    handleClear();
+  };
+
   return (
     <div className="max-w-4xl w-full bg-white rounded-xl m-3 p-6 flex flex-col justify-center items-center">
       <p className="text-4xl font-semibold">WORDS PER MINUTE</p>
       <p className="mt-4 text-8xl font-bold">{wpm}</p>
       <div className="flex justify-center items-center space-x-4 my-12">
         <button
-          onClick={handleCancelResult}
+          onClick={handleClear}
           className="relative flex py-2 text-white items-center justify-center px-8 before:absolute before:inset-0 before:rounded-full before:bg-indigo-700 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95"
         >
           <svg
@@ -39,10 +66,8 @@ const ScoreDisplay: React.FC<ScoreDisplayProps> = ({
             Cancel
           </span>
         </button>
-        <button
-          onClick={handleSubmit}
-          className="relative flex py-2 text-white items-center justify-center px-10 before:absolute before:inset-0 before:rounded-full before:bg-purple-700 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95"
-        >
+        {session ?
+        <button onClick={handleSubmit} className="relative flex py-2 text-white items-center justify-center px-10 before:absolute before:inset-0 before:rounded-full before:bg-purple-700 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -61,7 +86,7 @@ const ScoreDisplay: React.FC<ScoreDisplayProps> = ({
           <span className="relative flex justify-center items-center space-x-1 text-sm font-semibold">
             Save
           </span>
-        </button>
+        </button> : <SignInButton/> }
       </div>
     </div>
   );
