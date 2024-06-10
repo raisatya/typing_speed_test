@@ -29,8 +29,8 @@ const ScoreDisplay: React.FC<ScoreDisplayProps> = ({
         username: session?.user?.name,
         emailId: session?.user?.email,
         imgUrl: session?.user?.image,
-        deviceType: deviceType, // Replace with dynamic user ID
-        wpm,
+        wpm: wpm,
+        deviceType: deviceType
       }),
     });
     const data = await response.json();

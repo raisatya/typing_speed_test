@@ -12,8 +12,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
           username: body.username,
           emailId: body.emailId,
           imgUrl: body.imageUrl,
-          deviceType: body.deviceType,
           wpm: body.wpm,
+          deviceType: body.deviceType
         },
       });
 
@@ -21,6 +21,5 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     } catch (error) {
         return NextResponse.json(error);
-
     }
 }
