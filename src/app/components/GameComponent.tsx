@@ -24,6 +24,16 @@ const GameComponent = () => {
     }, []);
 
     useEffect(() => {
+      const getData = async () => {
+        const response = await fetch("http://localhost:3000/api/get-results");
+
+        console.log(response);
+      }
+
+      getData();
+    }, [])
+
+    useEffect(() => {
       if (timeLeft > 0 && startTime) {
         const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
         return () => clearTimeout(timer);
