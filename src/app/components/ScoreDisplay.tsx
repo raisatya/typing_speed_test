@@ -16,6 +16,7 @@ const ScoreDisplay: React.FC<ScoreDisplayProps> = ({
 }) => {
 
   const { data: session } = useSession();
+  console.log(session);
 
   const deviceType = isMobileDevice ? 'Mobile' : 'Desktop';
 
@@ -33,8 +34,6 @@ const ScoreDisplay: React.FC<ScoreDisplayProps> = ({
         deviceType: deviceType
       }),
     });
-    const data = await response.json();
-    console.log(data);
     handleClear();
   };
 

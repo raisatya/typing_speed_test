@@ -25,9 +25,11 @@ const GameComponent = () => {
 
     useEffect(() => {
       const getData = async () => {
-        const response = await fetch("http://localhost:3000/api/get-results");
+        const response = await fetch("http://localhost:3000/api/get-results/mobile");
 
-        console.log(response);
+        const data = await response.json();
+
+        console.log(data);
       }
 
       getData();

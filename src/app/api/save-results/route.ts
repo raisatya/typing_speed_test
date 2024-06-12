@@ -3,23 +3,17 @@ import { NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-export default async function POST(req: NextRequest, res: NextResponse) {
-    const body = await req.json();
+export const POST = async (req: NextRequest, res: NextResponse) => {
+  const body = await req.json();
+  const result = await prisma.testResult.create({
+    data: {
+      username: body.username,
+      emailId: body.emailId,
+      imgUrl: body.imgUrl,
+      wpm: body.wpm,
+      deviceType: body.deviceType,
+    },
+  });
 
-    try {
-      const result = await prisma.testResult.create({
-        data: {
-          username: body.username,
-          emailId: body.emailId,
-          imgUrl: body.imageUrl,
-          wpm: body.wpm,
-          deviceType: body.deviceType
-        },
-      });
-
-        return NextResponse.json(result);
-
-    } catch (error) {
-        return NextResponse.json(error);
-    }
-}
+  return NextResponse.json(result, { status: 201 });
+};
