@@ -1,5 +1,6 @@
 "use server"
 
+import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 interface resultDataTypes {
@@ -20,7 +21,7 @@ export const saveResult = async (resultDetails: resultDataTypes) => {
         deviceType: resultDetails.deviceType
     }
 
-    const res = await fetch("http://localhost:3000/api/save-results", {
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/save-results`, {
       method: "POST",
       body: JSON.stringify(newResult),
       headers: {
@@ -28,5 +29,7 @@ export const saveResult = async (resultDetails: resultDataTypes) => {
       }
     });
 
-    redirect("/");
+    const redirectlink = resultDetails.deviceType == 'Mobile' ? '/leaderboard/mobile' : '/leaderboard/desktop';
+    revalidateTag(`${resultDetails.deviceType}`)
+    redirect(`${redirectlink}`);
 };

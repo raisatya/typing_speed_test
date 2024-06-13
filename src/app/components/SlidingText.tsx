@@ -29,7 +29,7 @@ const SlidingText = () => {
             visible ? "fade-in" : ""
           }`}
         >
-          Let's find out
+          Start Game
         </button>
       </Link>
     </div>

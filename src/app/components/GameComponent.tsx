@@ -24,18 +24,6 @@ const GameComponent = () => {
     }, []);
 
     useEffect(() => {
-      const getData = async () => {
-        const response = await fetch("http://localhost:3000/api/get-results/mobile");
-
-        const data = await response.json();
-
-        console.log(data);
-      }
-
-      getData();
-    }, [])
-
-    useEffect(() => {
       if (timeLeft > 0 && startTime) {
         const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
         return () => clearTimeout(timer);
@@ -115,7 +103,7 @@ const GameComponent = () => {
       >
         <p className="text-lg font-semibold">TIME REMAINING</p>
         <p className="text-6xl font-semibold">{timeLeft}</p>
-        <div className="text-8xl font-semibold p-4 tracking-wide">
+        <div className="text-6xl sm:text-8xl font-semibold p-4 tracking-wide select-none">
           {renderText()}
         </div>
         <input

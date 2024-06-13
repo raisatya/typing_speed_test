@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
@@ -11,6 +11,7 @@ export const GET = async () => {
     orderBy: {
       wpm: "desc",
     },
+    take: 20
   });
 
   return NextResponse.json(result, { status: 200 });
