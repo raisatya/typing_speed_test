@@ -1,28 +1,15 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
+import Scores from "./Scores";
+import SignInButton from "./SignInButton";
 
-type TestResult = {
-  id: string;
-  username: string;
-  emailId: string;
-  imgUrl: string;
-  wpm: number;
-  deviceType: string;
-  createdAt: string;
-};
-
-type LeaderBoardDisplayComponentProps = {
-  results: TestResult[];
-};
-
-const LeaderBoardDisplayComponent: React.FC<
-  LeaderBoardDisplayComponentProps
-> = ({ results }) => {
-  
-
+const LeaderboardComponent = ({ devicetype }: { devicetype: string }) => {
   const pathName = usePathname();
+  const { data: session } = useSession();
 
   return (
     <div className="w-full flex flex-col items-center h-full overflow-y-hidden">
@@ -84,46 +71,16 @@ const LeaderBoardDisplayComponent: React.FC<
             <p>Device</p>
           </div>
         </div>
-        <div className="h-full w-full overflow-y-scroll">
-          {results.length > 0 ? (
-            results.map((result, index) => (
-              <div
-                key={result.id}
-                className="grid grid-cols-5 font-medium w-full p-2"
-              >
-                <div className="hidden sm:flex sm:col-span-1 px-6 pt-2">
-                  <p>{index + 1}</p>
-                </div>
-                <div className="col-span-4 sm:col-span-2 flex justify-start items-center space-x-4">
-                  <img
-                    src={result.imgUrl}
-                    alt="Dlogo"
-                    className="w-10 h-10 rounded-full border"
-                  />
-                  <p>{result.username}</p>
-                </div>
-                <div className="col-span-1 flex justify-center pt-2">
-                  <p>{result.wpm}</p>
-                </div>
-                <div className="hidden sm:col-span-1 sm:flex justify-center pt-2">
-                  <p>{result.deviceType}</p>
-                </div>
-              </div>
-            ))
-          ) : (
-            <div className="flex flex-col justify-start items-center space-y-4 p-8">
-              <p className="font-medium text-xl">No records found!</p>
-              <Link href="/console">
-                <button className="bg-blue-700 py-2 px-6 rounded-full font-medium text-xl text-white">
-                  Start Game
-                </button>
-              </Link>
-            </div>
-          )}
-        </div>
+        {session ?
+        <Scores devicetype={devicetype} /> : 
+      <div className="flex flex-col justify-start items-center p-6 h-full w-full space-y-4">
+        <p className="font-medium text-lg">You must be signed in</p>
+        <SignInButton/>
+          </div>
+          }
       </div>
     </div>
   );
 };
 
-export default LeaderBoardDisplayComponent;
+export default LeaderboardComponent;
