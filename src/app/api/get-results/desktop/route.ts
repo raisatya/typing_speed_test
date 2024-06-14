@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
+export const dynamic = "force-dynamic";
+
 export const GET = async () => {
   const result = await prisma.testResult.findMany({
     where: {

@@ -37,7 +37,6 @@ const Scores = ({ devicetype }: { devicetype: string }) => {
       const [results, setResults] = useState<TestResult[]>([]);
       const [loading, setLoading] = useState<boolean>(true);
       const [error, setError] = useState<string | null>(null);
-      console.log(results);
 
     useEffect(() => {
       const loadResults = async () => {

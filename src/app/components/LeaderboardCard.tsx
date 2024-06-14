@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { signIn } from "next-auth/react";
 import Scores from "./Scores";
 import SignInButton from "./SignInButton";
 
