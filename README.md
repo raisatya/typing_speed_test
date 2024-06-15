@@ -1,38 +1,105 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Typing Speed Test
+
+A web application to test and improve your typing speed, built with modern web technologies. This project was an excellent opportunity to learn and implement various tools and frameworks.
+
+## Tech Stack
+
+- **Next.js**: React framework for building server-side rendered and statically generated web applications.
+- **TypeScript**: A strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
+- **React**: JavaScript library for building user interfaces.
+- **Tailwind CSS**: Utility-first CSS framework for rapid UI development.
+- **Prisma**: ORM (Object-Relational Mapping) tool for seamless database integration.
+- **NextAuth**: Authentication for Next.js applications.
+- **Vercel**: Deployment platform for frontend frameworks and static sites.
+
+## Key Takeaways
+
+- **Prisma ORM**: Efficiently manage and interact with the database.
+- **NextAuth**: Implemented secure and scalable authentication.
+- **Monorepos**: Improved project organization and dependency management.
+
+## Features
+
+- Measure and display typing speed in real-time.
+- User authentication using NextAuth.
+- Responsive design with Tailwind CSS.
 
 ## Getting Started
 
-First, run the development server:
+Follow these steps to set up the project locally.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+### Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Node.js (v14 or later)
+- npm or yarn
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Installation
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+1. **Clone the repository:**
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+   ```bash
+   git clone https://github.com/raisatya/typing_speed_test.git
+   cd typing_speed_test
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. **Install dependencies:**
 
-## Learn More
+   Using npm:
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+   Using yarn:
+   ```bash
+   yarn install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Set up environment variables:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   Create a `.env.local` file in the root of the project and add the following variables:
 
-## Deploy on Vercel
+   ```env
+   DATABASE_URL=your_database_url
+   NEXTAUTH_URL=http://localhost:3000
+   NEXTAUTH_SECRET=your_secret
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. **Prisma setup:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   Generate Prisma client and run migrations:
+
+   ```bash
+   npx prisma generate
+   npx prisma migrate dev
+   ```
+
+5. **Run the development server:**
+
+   Using npm:
+   ```bash
+   npm run dev
+   ```
+
+   Using yarn:
+   ```bash
+   yarn dev
+   ```
+
+   Open [http://localhost:3000](http://localhost:3000) to see the application in action.
+
+## Contributing
+
+Feel free to open issues or submit pull requests if you have suggestions or improvements.
+
+## License
+
+This project is licensed under the MIT License.
+
+## Acknowledgements
+
+- Special thanks to the developers of the technologies used in this project.
+- Inspiration and code snippets were taken from various tutorials and open-source projects.
+
+---
+
+For more details, check out the [GitHub Repo](https://github.com/raisatya/typing_speed_test---NEXTjs-NextAuth-Prisma-Postgres). Enjoy testing your typing speed! 🚀
